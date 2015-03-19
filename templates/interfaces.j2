@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+{% for network_interface in network_interfaces %}
+{% if network_interface.auto %}
+auto {{ network_interface.device }}
+{% endif %}
+iface {{ network_interface.device }} {{ network_interface.family }} {{ network_interface.method }}
+{%   if network_interface.method == "static" %}
+  address {{ network_interface.address }}
+  network {{ network_interface.network }}
+  netmask {{ network_interface.netmask }}
+  broadcast {{ network_interface.broadcast }}
+  gateway {{ network_interface.gateway }}
+  dns-nameservers {{ network_interface.dns_nameservers|join(' ') }}
+  dns-search {{ network_interface.dns_search|join(' ') }}
+{%   endif %}
+pre-up sleep 2
+{% endfor %}

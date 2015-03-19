@@ -1,0 +1,4 @@
+---
+# vars file for network_interface (Ubuntu specific)
+
+network_interfaces_service_name: networking

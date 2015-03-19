@@ -1,2 +1,17 @@
 ---
 # defaults file for network_interface
+
+network_interfaces:
+  - device: eth0
+    auto: true
+    family: inet
+    method: dhcp
+    address: 192.168.0.10
+    network: 192.168.0.0
+    netmask: 255.255.255.0
+    broadcast: 192.168.0.255
+    gateway: 192.168.0.1
+    dns_nameservers:
+      - 8.8.8.8
+    dns_search:
+      - "{{ ansible_domain }}"

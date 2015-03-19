@@ -1,0 +1,12 @@
+---
+# tasks file for network_interface (Ubuntu specific)
+
+- name: Configure network interfaces
+  template: >
+    src=interfaces.j2
+    dest=/etc/network/interfaces
+    owner=root
+    group=root
+    mode=0644
+  notify: restart networking
+  tags: network_interfaces

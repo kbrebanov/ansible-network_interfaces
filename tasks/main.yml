@@ -1,2 +1,14 @@
 ---
 # tasks file for network_interface
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: network_interfaces
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+  tags: network_interfaces
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+  tags: network_interfaces
